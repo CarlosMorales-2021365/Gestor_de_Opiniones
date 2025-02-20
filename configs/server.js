@@ -5,6 +5,7 @@ import cors from "cors"
 import helmet from "helmet"
 import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
+import authRoutes from "../src/auth/auth.routes.js"
 import User from "../src/user/user.model.js"
 import { hash } from "bcrypt"
 
@@ -15,6 +16,10 @@ const middelwares = (app) =>{
     app.use(cors())
     app.use(helmet())
     app.use(morgan("dev"))
+}
+
+const routes = (app)=>{
+    app.use("/gestorDeOpiniones/v1/auth", authRoutes)
 }
 
 const connectarDB = async () =>{
@@ -56,6 +61,7 @@ export const initServer = () => {
         middelwares(app)
         connectarDB()
         crearAdministrador()
+        routes(app)
         app.listen(process.env.PORT)
         console.log(`Server running on a port  ${process.env.PORT}`)
     }catch(err){
