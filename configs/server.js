@@ -6,8 +6,9 @@ import helmet from "helmet"
 import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
 import authRoutes from "../src/auth/auth.routes.js"
+import userRoutes from "../src/user/user.routes.js"
 import User from "../src/user/user.model.js"
-import { hash } from "bcrypt"
+import { hash } from "argon2"
 
 
 const middelwares = (app) =>{
@@ -20,6 +21,7 @@ const middelwares = (app) =>{
 
 const routes = (app)=>{
     app.use("/gestorDeOpiniones/v1/auth", authRoutes)
+    app.use("/gestorDeOpiniones/v1/user", userRoutes)
 }
 
 const connectarDB = async () =>{
@@ -36,7 +38,7 @@ const crearAdministrador = async ()=>{
         const adminExist = await User.findOne({role: "ADMIN_ROLE"});
 
         if(!adminExist){
-            const encryptedPassword = await hash("Abc123**", 10)
+            const encryptedPassword = await hash("Abc123**")
 
             const admin = new User({
                 name: "Admin",
