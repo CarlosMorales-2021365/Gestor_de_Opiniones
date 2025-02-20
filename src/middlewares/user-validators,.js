@@ -40,3 +40,20 @@ export const updatePasswordValidator = [
     validarCampos,
     handleErrors
 ];
+
+export const updateUserValidator = [
+    validateJWT,
+    param("uid", "No es un ID válido").isMongoId(),
+    param("uid").custom(userExists),
+    validarCampos,
+    handleErrors
+];
+
+export const updateProfilePictureValidator = [
+    validateJWT,
+    param("uid").isMongoId().withMessage("No es un ID válido de MongoDB"),
+    param("uid").custom(userExists),
+    validarCampos,
+    deleteFileOnError,
+    handleErrors
+];
