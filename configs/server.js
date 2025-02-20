@@ -36,7 +36,7 @@ const crearAdministrador = async ()=>{
         const adminExist = await User.findOne({role: "ADMIN_ROLE"});
 
         if(!adminExist){
-            const encryptedPassword = await hash("abc123**", 10)
+            const encryptedPassword = await hash("Abc123**", 10)
 
             const admin = new User({
                 name: "Admin",
