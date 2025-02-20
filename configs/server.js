@@ -9,6 +9,7 @@ import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
 import User from "../src/user/user.model.js"
 import { hash } from "argon2"
+import Categoria from "../src/categoria/categoria.model.js"
 
 
 const middelwares = (app) =>{
@@ -57,12 +58,30 @@ const crearAdministrador = async ()=>{
     }
 }
 
+const crearCategoriaInicial = async ()=>{
+    try{
+        const categoriaExist = await Categoria.findOne({status: true});
+
+        if(!categoriaExist){
+            
+            const categoria = new Categoria({
+                name: "General"
+            });
+            await categoria.save();
+            console.log("Categoria creada exitosamente")
+        }
+    }catch(err){
+        console.log(`Error al crear la categoria ${err}`)
+    }
+}
+
 export const initServer = () => {
     const app = express()
     try{
         middelwares(app)
         connectarDB()
         crearAdministrador()
+        crearCategoriaInicial()
         routes(app)
         app.listen(process.env.PORT)
         console.log(`Server running on a port  ${process.env.PORT}`)
