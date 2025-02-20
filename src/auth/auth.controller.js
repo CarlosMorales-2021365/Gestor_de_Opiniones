@@ -1,7 +1,6 @@
-import { hash } from "argon2"
+import { hash, verify } from "argon2"
 import User from "../user/user.model.js"
 import { generateJWT } from "../helpers/generate-jwt.js"
-import bcrypt from 'bcrypt'
 
 export const register = async (req, res) => {
     try{
@@ -40,10 +39,9 @@ export const login = async (req, res) => {
             })
         }
 
-        const validPassword = await bcrypt.compare(password, user.password);
+        const validPassword = await verify(user.password, password,)
 
         if(!validPassword){
-            console.log(password)
             return res.status(400).json({
                 message: "Crendenciales inválidas",
                 error: "Contraseña incorrecta"
