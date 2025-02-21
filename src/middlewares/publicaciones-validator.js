@@ -27,3 +27,11 @@ export const getPublicacionesByIdValidator = [
     validarCampos,
     handleErrors
 ];
+
+export const deletePublicacionesIdValidator = [
+    validateJWT,
+    param("id").isMongoId().withMessage("No es un ID válido"),
+    param("id").custom(publicacionExists),
+    validarCampos,
+    handleErrors
+];

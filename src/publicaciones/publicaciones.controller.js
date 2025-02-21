@@ -82,3 +82,23 @@ export const getPublicacionesByID = async (req, res) => {
         })
     }
 }
+
+export const deletePublicacion = async (req, res)=> {
+    try{
+        const { id } = req.params
+
+        const publicaciones = await Publicaciones.findByIdAndUpdate( id,{status: false}, {new: true})
+
+        return res.status(200).json({
+            success: true,
+            message: "Publicacion eliminada",
+            publicaciones
+        })
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error al eliminar el usuario",
+            error: err.message
+        }) 
+    }
+}

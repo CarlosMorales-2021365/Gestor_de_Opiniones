@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { createPublicacion, updatePublicaciones, getPublicacionesByID } from "./publicaciones.controller.js"; 
-import { createPublicacionesValidator, updatePublicacionValidator, getPublicacionesByIdValidator } from "../middlewares/publicaciones-validator.js";
+import { createPublicacion, updatePublicaciones, getPublicacionesByID, deletePublicacion } from "./publicaciones.controller.js"; 
+import { createPublicacionesValidator, updatePublicacionValidator, getPublicacionesByIdValidator, deletePublicacionesIdValidator } from "../middlewares/publicaciones-validator.js";
 
 const router = Router();
 
@@ -9,5 +9,7 @@ router.post("/crearPublicaciones", createPublicacionesValidator, createPublicaci
 router.put("/updatePublicacion/:id", updatePublicacionValidator, updatePublicaciones); 
 
 router.get("/getPublicacionById/:id", getPublicacionesByIdValidator, getPublicacionesByID);
+
+router.delete("/deletePublicacion/:id", deletePublicacionesIdValidator, deletePublicacion);
 
 export default router;
