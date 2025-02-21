@@ -23,7 +23,11 @@ const publicacionesSchema = new Schema({
     status:{
         type: Boolean,
         default: true
-    }
+    },
+    comentarios:[{
+        type: Schema.Types.ObjectId,
+        ref: "Comentarios"
+    }]
 },{
     versionKey: false,
     timestamps: true

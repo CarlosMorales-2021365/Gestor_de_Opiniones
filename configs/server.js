@@ -9,6 +9,7 @@ import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
 import categoriasRoutes from "../src/categoria/categorias.routes.js"
 import publicacionesRoutes from "../src/publicaciones/publicaciones.routes.js"
+import comentariosRoutes from "../src/comentarios/comentarios.routes.js"
 import User from "../src/user/user.model.js"
 import { hash } from "argon2"
 import Categoria from "../src/categoria/categoria.model.js"
@@ -27,6 +28,7 @@ const routes = (app)=>{
     app.use("/gestorDeOpiniones/v1/user", userRoutes)
     app.use("/gestorDeOpiniones/v1/categorias", categoriasRoutes)
     app.use("/gestorDeOpiniones/v1/publicaciones", publicacionesRoutes)
+    app.use("/gestorDeOpiniones/v1/comentarios", comentariosRoutes)
 }
 
 const connectarDB = async () =>{
