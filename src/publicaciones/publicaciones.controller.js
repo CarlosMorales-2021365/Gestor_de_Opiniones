@@ -55,3 +55,30 @@ export const updatePublicaciones = async (req, res) =>{
               }); 
         }
 }
+
+export const getPublicacionesByID = async (req, res) => {
+    try{
+        const { id } = req.params;
+        const publicaciones = await Publicaciones.findById(id)
+        .populate('categoria') 
+        .populate('user'); 
+
+        if(!publicaciones){
+            return res.status(404).json({
+                success: false,
+                message: "Publicacion no encontrada"
+            })
+        }
+
+        return res.status(200).json({
+            sucess: true,
+            publicaciones
+        })
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error al obtener la publicacion",
+            error: err.message
+        })
+    }
+}

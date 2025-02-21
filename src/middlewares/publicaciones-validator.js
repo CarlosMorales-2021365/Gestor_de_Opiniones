@@ -20,3 +20,10 @@ export const updatePublicacionValidator = [
     validarCampos,
     handleErrors
 ]
+
+export const getPublicacionesByIdValidator = [
+    param("id").isMongoId().withMessage("No es un ID válido"),
+    param("id").custom(publicacionExists),
+    validarCampos,
+    handleErrors
+];
