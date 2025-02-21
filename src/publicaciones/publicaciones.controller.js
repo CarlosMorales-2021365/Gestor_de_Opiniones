@@ -17,11 +17,15 @@ export const createPublicacion = async (req, res) => {
 
         const publicaciones = new Publicaciones({categoria, title, text, user: usuario._id,});
         await publicaciones.save();
+
+        const publicacionesConDatos = await Publicaciones.findById(publicaciones._id)
+            .populate('categoria')
+            .populate('user');
         
         return res.status(200).json({
             success: true,
             msg: `La publicacion fue creada extosamente`,
-            publicaciones
+            publicaciones: publicacionesConDatos
         });
     }catch(error){
         return res.status(500).json({
@@ -29,4 +33,25 @@ export const createPublicacion = async (req, res) => {
             error
         });
     }
+}
+
+export const updatePublicaciones = async (req, res) =>{
+    try{
+        const { id } = req.params;
+        const data = req.body;
+
+        const publicacion = await Publicaciones.findByIdAndUpdate(id, data, {new: true});
+
+        res.status(200).json({
+            success: true,
+            msg: "Publicacion actualizada",
+            publicacion
+        })
+        }catch(err){
+            res.status(500).json({
+                success: false,
+                msg: "Error al actualizar la publicacion",
+                error: err.message
+              }); 
+        }
 }
