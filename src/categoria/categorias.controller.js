@@ -42,3 +42,22 @@ export const updateCategoria = async (req, res) => {
         }); 
     }
 }
+
+export const deleteCategoria = async (req, res) => {
+    try{
+        const { id } = req.params;
+
+        await Categoria.findByIdAndUpdate(id, { status: false});
+
+        res.status(200).json({
+            success: true,
+            message: 'Categoria eliminada'
+        });
+    }catch(error){
+        res.status(500).json({
+            success: false,
+            message: 'Error al eliminar la categoria',
+            error
+        }); 
+    }
+}
