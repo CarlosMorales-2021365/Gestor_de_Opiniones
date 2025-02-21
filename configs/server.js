@@ -7,6 +7,7 @@ import morgan from "morgan"
 import { dbConnection } from "./mongo.js"
 import authRoutes from "../src/auth/auth.routes.js"
 import userRoutes from "../src/user/user.routes.js"
+import categoriasRoutes from "../src/categoria/categorias.routes.js"
 import User from "../src/user/user.model.js"
 import { hash } from "argon2"
 import Categoria from "../src/categoria/categoria.model.js"
@@ -23,6 +24,7 @@ const middelwares = (app) =>{
 const routes = (app)=>{
     app.use("/gestorDeOpiniones/v1/auth", authRoutes)
     app.use("/gestorDeOpiniones/v1/user", userRoutes)
+    app.use("/gestorDeOpiniones/v1/categorias", categoriasRoutes)
 }
 
 const connectarDB = async () =>{
@@ -63,7 +65,7 @@ const crearCategoriaInicial = async ()=>{
         const categoriaExist = await Categoria.findOne({status: true});
 
         if(!categoriaExist){
-            
+
             const categoria = new Categoria({
                 name: "General"
             });
