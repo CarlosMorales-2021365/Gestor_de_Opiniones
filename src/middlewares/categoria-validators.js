@@ -12,3 +12,12 @@ export const createCategoriaValidator = [
     validarCampos,
     handleErrors
 ]
+
+export const updatecategoriarValidator = [
+    validateJWT,
+    hasRoles('ADMIN_ROLE'),
+    param("id", "No es un ID válido").isMongoId(),
+    param("id").custom(categoriaExists),
+    validarCampos,
+    handleErrors
+];
