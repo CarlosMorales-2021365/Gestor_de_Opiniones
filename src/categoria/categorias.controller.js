@@ -1,6 +1,7 @@
 'use strict';
 
 import Categoria from "./categoria.model.js"
+import Publicaciones from "../publicaciones/publicaciones.model.js"
 
 export const createCategoria = async (req, res) => {
     try{
@@ -46,6 +47,20 @@ export const updateCategoria = async (req, res) => {
 export const deleteCategoria = async (req, res) => {
     try{
         const { id } = req.params;
+
+        const generalCategoria = await Categoria.findOne({ name: "General" });
+
+        if (!generalCategoria) {
+            return res.status(404).json({
+                success: false,
+                message: 'No se encontró la categoría "General"'
+            });
+        }
+
+        await Publicaciones.updateMany(
+            { categoria: id }, 
+            { $set: { categoria: generalCategoria._id } } 
+        );
 
         await Categoria.findByIdAndUpdate(id, { status: false});
 
