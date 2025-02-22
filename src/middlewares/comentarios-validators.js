@@ -21,3 +21,11 @@ export const updateComentariosValidator = [
     validarCampos,
     handleErrors
 ]
+
+export const deleteComentariosValidator = [
+    validateJWT,
+    param("id").isMongoId().withMessage("No es un ID válido"),
+    param("id").custom(comentarioExists),
+    validarCampos,
+    handleErrors
+]

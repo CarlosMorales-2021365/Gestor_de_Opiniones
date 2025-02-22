@@ -11,6 +11,13 @@ export const updatePassword = async (req, res) => {
         const { uid } = req.params;
         const { oldPassword, newPassword } = req.body;
 
+        if (uid !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "No tienes permisos para actualizar la contraseña de otro usuario"
+            });
+        }
+
         const user = await User.findById(uid);
         if (!user) {
             return res.status(404).json({
@@ -57,6 +64,13 @@ export const updateUser = async (req, res) => {
         const { uid } = req.params;
         const  data  = req.body;
 
+        if (uid !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "No tienes permisos para actualizar esta cuenta"
+            });
+        }
+
         const user = await User.findByIdAndUpdate(uid, data, { new: true });
 
         res.status(200).json({
@@ -77,6 +91,13 @@ export const updateProfilePicture = async(req,res) =>{
     try{
         const { uid } = req.params
         let newprofilePicture = req.file ? req.file.filename : null
+
+        if (uid !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "No tienes permisos para actualizar la foto de perfil de otro usuario"
+            });
+        }
 
         if(!newprofilePicture){
             return res.status(400).json({

@@ -42,7 +42,7 @@ export const updateComentario = async (req, res)=>{
         const { id } = req.params;
         const data = req.body;
 
-        const comentario = await Comentarios.findByIdAndUpdate(id, data,{new: true});
+        const comentario = await Comentarios.findById(id);
 
         if (comentario.user.toString() !== req.usuario._id.toString()) {
             return res.status(403).json({
@@ -51,10 +51,12 @@ export const updateComentario = async (req, res)=>{
             });
         }
 
+        const comentarioActualizado = await Comentarios.findByIdAndUpdate(id, data,{new: true});
+
         res.status(200).json({
             success: true,
             msg: 'Comentario Actualizado',
-            comentario,
+            comentarioActualizado,
         });
     }catch(err){
         res.status(500).json({
@@ -65,3 +67,36 @@ export const updateComentario = async (req, res)=>{
     }
 }
 
+export const deleteComentario = async (req, res)=>{
+    try{
+        const { id } = req.params
+
+        const comentario = await Comentarios.findById(id);
+
+        if (comentario.user.toString() !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: 'No tienes permisos para actualizar este comentario',
+            });
+        }
+
+        await Publicaciones.findByIdAndUpdate(
+            comentario.publicacion,
+            { $pull: { comentarios: id } } 
+        );
+
+        const comentarioEliminado = await Comentarios.findByIdAndUpdate(id, {status: false}, {new: true})
+
+        return res.status(200).json({
+            success: true,
+            message: "Comentario eliminado",
+            comentarioEliminado
+        })
+    }catch(err){
+        return res.status(500).json({
+            success: false,
+            message: "Error al eliminar el comentario",
+            error: err.message
+        })
+    }
+}
