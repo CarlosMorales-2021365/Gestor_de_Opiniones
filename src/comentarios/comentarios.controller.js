@@ -37,3 +37,31 @@ export const crearComentario = async (req, res) => {
     }
 }
 
+export const updateComentario = async (req, res)=>{
+    try{
+        const { id } = req.params;
+        const data = req.body;
+
+        const comentario = await Comentarios.findByIdAndUpdate(id, data,{new: true});
+
+        if (comentario.user.toString() !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: 'No tienes permisos para actualizar este comentario',
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            msg: 'Comentario Actualizado',
+            comentario,
+        });
+    }catch(err){
+        res.status(500).json({
+            success: false,
+            msg: 'Error al actualizar el comentario',
+            error: err.message
+        });
+    }
+}
+
