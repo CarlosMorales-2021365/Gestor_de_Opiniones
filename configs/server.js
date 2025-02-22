@@ -11,8 +11,10 @@ import categoriasRoutes from "../src/categoria/categorias.routes.js"
 import publicacionesRoutes from "../src/publicaciones/publicaciones.routes.js"
 import comentariosRoutes from "../src/comentarios/comentarios.routes.js"
 import User from "../src/user/user.model.js"
+import apiLimiter from "../src/middlewares/rate-limit-validator.js"
 import { hash } from "argon2"
 import Categoria from "../src/categoria/categoria.model.js"
+import { swaggerDocs, swaggerUi} from "./swagger.js";
 
 
 const middelwares = (app) =>{
@@ -21,6 +23,7 @@ const middelwares = (app) =>{
     app.use(cors())
     app.use(helmet())
     app.use(morgan("dev"))
+    app.use(apiLimiter)
 }
 
 const routes = (app)=>{
@@ -29,6 +32,7 @@ const routes = (app)=>{
     app.use("/gestorDeOpiniones/v1/categorias", categoriasRoutes)
     app.use("/gestorDeOpiniones/v1/publicaciones", publicacionesRoutes)
     app.use("/gestorDeOpiniones/v1/comentarios", comentariosRoutes)
+    app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 }
 
 const connectarDB = async () =>{
@@ -86,9 +90,9 @@ export const initServer = () => {
     try{
         middelwares(app)
         connectarDB()
+        routes(app)
         crearAdministrador()
         crearCategoriaInicial()
-        routes(app)
         app.listen(process.env.PORT)
         console.log(`Server running on a port  ${process.env.PORT}`)
     }catch(err){
