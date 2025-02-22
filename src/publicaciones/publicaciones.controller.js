@@ -1,5 +1,6 @@
 import Publicaciones from './publicaciones.model.js';
 import Categoria from '../categoria/categoria.model.js';
+import Comentarios from '../comentarios/comentarios.model.js'
 
 export const createPublicacion = async (req, res) => {
     try {
@@ -105,6 +106,8 @@ export const deletePublicacion = async (req, res)=> {
                 msg: 'No tienes permisos para eliminar esta publicación',
             });
         }
+
+        await Comentarios.deleteMany({ publicacion: id });
 
         const publicaciones = await Publicaciones.findByIdAndUpdate( id,{status: false}, {new: true})
 
