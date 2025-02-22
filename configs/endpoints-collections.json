@@ -1,0 +1,675 @@
+{
+	"info": {
+		"_postman_id": "c549496b-8616-4c60-811b-f0f22f199c09",
+		"name": "Gestor de opiniones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41867639"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "registrar",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Diego Efrain",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Morales Cuin",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "Dmorales",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Dmorales22@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abc123**",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/deadpool-and-wolverine-trailer-san-valentin.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/auth/register",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Dieguito\",\r\n    \"password\":\"**123Abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "actualizar contraseña",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTRmOWIzZjFkZmI4MmI2MWM4OGMiLCJpYXQiOjE3NDAxODYwOTMsImV4cCI6MTc0MDE4OTY5M30.kwtxc938ReFQeEYyiei27yXqW_rQhl4Lxa9NDruMZAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\":\"Abc123**\",\r\n    \"newPassword\":\"**123Abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/user/updatePassword/67b6a534b3f1dfb82b61c890",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"user",
+								"updatePassword",
+								"67b6a534b3f1dfb82b61c890"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTRmOWIzZjFkZmI4MmI2MWM4OGMiLCJpYXQiOjE3NDAxODYwOTMsImV4cCI6MTc0MDE4OTY5M30.kwtxc938ReFQeEYyiei27yXqW_rQhl4Lxa9NDruMZAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Diego\",\r\n    \"surname\":\"Morales\",\r\n    \"username\":\"Dieguitoss\",\r\n    \"email\":\"Dgzzz@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/user/updateUser/67b6a534b3f1dfb82b61c890",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"user",
+								"updateUser",
+								"67b6a534b3f1dfb82b61c890"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar foto de perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTRmOWIzZjFkZmI4MmI2MWM4OGMiLCJpYXQiOjE3NDAxODYwOTMsImV4cCI6MTc0MDE4OTY5M30.kwtxc938ReFQeEYyiei27yXqW_rQhl4Lxa9NDruMZAM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/Admin/Desktop/foto.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/user/updateProfilePicture/67b6a534b3f1dfb82b61c890",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"user",
+								"updateProfilePicture",
+								"67b6a534b3f1dfb82b61c890"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categorias",
+			"item": [
+				{
+					"name": "crear categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YWVkZjRiZmFkODg0ZDNhYjM2YjkiLCJpYXQiOjE3NDAxMTA2NTcsImV4cCI6MTc0MDExNDI1N30.Ixd1rks9vFuNO21aE4PIecqyWoWr5LISIf_MLpB0sH8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"prueba2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/categorias/createCategoria",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"categorias",
+								"createCategoria"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YWVkZjRiZmFkODg0ZDNhYjM2YjkiLCJpYXQiOjE3NDAwOTYxMzAsImV4cCI6MTc0MDA5OTczMH0.gs2lR5NqKM3kRVNZX-5JKiIqikXoL-3jZM0Fj8WK0qQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"Medicina\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/categorias/updatecategoria/67b7c5ae0fa4f7d53f7a41dc",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"categorias",
+								"updatecategoria",
+								"67b7c5ae0fa4f7d53f7a41dc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YWVkZjRiZmFkODg0ZDNhYjM2YjkiLCJpYXQiOjE3NDAxMTA2NTcsImV4cCI6MTc0MDExNDI1N30.Ixd1rks9vFuNO21aE4PIecqyWoWr5LISIf_MLpB0sH8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/categorias/deleteCategorias/67b804522bae17fff352a239",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"categorias",
+								"deleteCategorias",
+								"67b804522bae17fff352a239"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "publicaciones",
+			"item": [
+				{
+					"name": "crear publicaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTUzNGIzZjFkZmI4MmI2MWM4OTAiLCJpYXQiOjE3NDAxODYyODUsImV4cCI6MTc0MDE4OTg4NX0.k1Pl1Zam5IHRx86HxtcX9uK5aue0ps8N8aUBvsEOhNQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Esto es una prueba\",\r\n    \"categoria\":\"67b7c2ba85448ad7bb5c9330\",\r\n    \"text\":\"Prueba para seber si me elimina los comentarios \",\r\n    \"user\":\"Dieguito\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/publicaciones/crearPublicaciones",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"publicaciones",
+								"crearPublicaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar publicaciones",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTUzNGIzZjFkZmI4MmI2MWM4OTAiLCJpYXQiOjE3NDAxODYyODUsImV4cCI6MTc0MDE4OTg4NX0.k1Pl1Zam5IHRx86HxtcX9uK5aue0ps8N8aUBvsEOhNQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\":\"Feliz dia de la independancia\",\r\n    \"categoria\":\"67b7b24b02924b24fab69a50\",\r\n    \"text\":\"Todos estamo felices de ser parte de esta nacion siiiiii\",\r\n    \"user\":\"67b6a4f9b3f1dfb82b61c88c\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/publicaciones/updatePublicacion/67b8bd301d6de02de535290e",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"publicaciones",
+								"updatePublicacion",
+								"67b8bd301d6de02de535290e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscar publicacion",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/publicaciones/getPublicacionById/67b8bd301d6de02de535290e",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"publicaciones",
+								"getPublicacionById",
+								"67b8bd301d6de02de535290e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "elimiar publicacion",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTUzNGIzZjFkZmI4MmI2MWM4OTAiLCJpYXQiOjE3NDAxODYyODUsImV4cCI6MTc0MDE4OTg4NX0.k1Pl1Zam5IHRx86HxtcX9uK5aue0ps8N8aUBvsEOhNQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/publicaciones/deletePublicacion/67b896675b08085810517da6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"publicaciones",
+								"deletePublicacion",
+								"67b896675b08085810517da6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comentarios",
+			"item": [
+				{
+					"name": "crear comentarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTUzNGIzZjFkZmI4MmI2MWM4OTAiLCJpYXQiOjE3NDAxODYyODUsImV4cCI6MTc0MDE4OTg4NX0.k1Pl1Zam5IHRx86HxtcX9uK5aue0ps8N8aUBvsEOhNQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"publicacion\":\"67b9239406cf65ba4d8323b1\",\r\n    \"user\":\"67b6a534b3f1dfb82b61c890\",\r\n    \"text\":\"Viva la nacion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/comentarios/createComentarios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"comentarios",
+								"createComentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "actualizar comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTUzNGIzZjFkZmI4MmI2MWM4OTAiLCJpYXQiOjE3NDAxODQwODcsImV4cCI6MTc0MDE4NzY4N30.B3Ps_gGqJwzbTXeJQr6mkBiND5gfbdqjek-E7vOg-nM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"text\":\"Es verdad VIVA LA NACION\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/comentarios/updateComentarios/67b91840c6713df520f93494",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"comentarios",
+								"updateComentarios",
+								"67b91840c6713df520f93494"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "eliminar comentario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2N2I2YTRmOWIzZjFkZmI4MmI2MWM4OGMiLCJpYXQiOjE3NDAxODQ0NzMsImV4cCI6MTc0MDE4ODA3M30.52XBgT-CCTyXDrKi_KzaiWz7kcUCUoXjptVaw3LZE3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3001/gestorDeOpiniones/v1/comentarios/deleteComentarios/67b90601fa3d9557dcd67eb9",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3001",
+							"path": [
+								"gestorDeOpiniones",
+								"v1",
+								"comentarios",
+								"deleteComentarios",
+								"67b90601fa3d9557dcd67eb9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

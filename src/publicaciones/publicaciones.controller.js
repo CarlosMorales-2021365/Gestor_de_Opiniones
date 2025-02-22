@@ -1,5 +1,6 @@
 import Publicaciones from './publicaciones.model.js';
 import Categoria from '../categoria/categoria.model.js';
+import Comentarios from '../comentarios/comentarios.model.js'
 
 export const createPublicacion = async (req, res) => {
     try {
@@ -40,12 +41,21 @@ export const updatePublicaciones = async (req, res) =>{
         const { id } = req.params;
         const data = req.body;
 
-        const publicacion = await Publicaciones.findByIdAndUpdate(id, data, {new: true});
+        const publicacion = await Publicaciones.findById(id);
+
+        if (publicacion.user.toString() !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: 'No tienes permisos para actualizar esta publicación',
+            });
+        }
+
+        const publicacionActualizada = await Publicaciones.findByIdAndUpdate(id, data, {new: true});
 
         res.status(200).json({
             success: true,
             msg: "Publicacion actualizada",
-            publicacion
+            publicacionActualizada
         })
         }catch(err){
             res.status(500).json({
@@ -61,7 +71,8 @@ export const getPublicacionesByID = async (req, res) => {
         const { id } = req.params;
         const publicaciones = await Publicaciones.findById(id)
         .populate('categoria') 
-        .populate('user'); 
+        .populate('user')
+        .populate('comentarios');
 
         if(!publicaciones){
             return res.status(404).json({
@@ -86,6 +97,17 @@ export const getPublicacionesByID = async (req, res) => {
 export const deletePublicacion = async (req, res)=> {
     try{
         const { id } = req.params
+
+        const publicacion = await Publicaciones.findById(id);
+
+        if (publicacion.user.toString() !== req.usuario._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                msg: 'No tienes permisos para eliminar esta publicación',
+            });
+        }
+
+        await Comentarios.deleteMany({ publicacion: id });
 
         const publicaciones = await Publicaciones.findByIdAndUpdate( id,{status: false}, {new: true})
 
